@@ -156,6 +156,20 @@ void showMenu()
         cout << '\t' << menuStr[i] << " = " << i << endl;
 }
 
+void fileUpdate(string fileName, vector<price> vec)
+{
+    file.open(fileName.c_str(), ios::out);
+    if (file.fail())
+    {
+        cout << "db.txt file was not created." << endl;
+        return;
+    }
+    for (int i = 0; i < vec.size(); i++)
+        file << vec[i].getID() << " " << vec[i].getName() << " "
+             << vec[i].getMoney() << " " << vec[i].Date() << " " << vec[i].getTick() << " " << vec[i].getDetail() << endl;
+    file.close();
+}
+
 int main()
 {
     cout.precision(20);
@@ -200,16 +214,7 @@ int main()
         cin >> choice;
         if (choice == 5)
         {
-            file.open(fileName.c_str(), ios::out);
-            if (file.fail())
-            {
-                cout << "db.txt file was not created." << endl;
-                return 0;
-            }
-            for (int i = 0; i < vec.size(); i++)
-                file << vec[i].getID() << " " << vec[i].getName() << " "
-                     << vec[i].getMoney() << " " << vec[i].Date() << " " << vec[i].getTick() << " " << vec[i].getDetail() << endl;
-            file.close();
+            fileUpdate(fileName, vec);
             break;
         }
         else if (choice == 0)
@@ -227,6 +232,7 @@ int main()
             temp.get(index, name, getDate, money, tick, detail);
             vec.push_back(temp);
             sort(vec.begin(), vec.end());
+            fileUpdate(fileName, vec);
         }
         else if (choice == 1)
         {
@@ -289,6 +295,7 @@ int main()
                     sort(vec.begin(), vec.end());
                     cout << "Done." << endl
                          << endl;
+                    fileUpdate(fileName, vec);
                     break;
                 }
             if (!B)
@@ -325,10 +332,10 @@ int main()
             else if (totalIdx == 1)
             {
                 for (int i = 0; i < vec.size(); i++)
-                        if (vec[i].getTick())
-                            if (vec[i].getMoney() > 0)
-                                total += vec[i].getMoney();
-            }    
+                    if (vec[i].getTick())
+                        if (vec[i].getMoney() > 0)
+                            total += vec[i].getMoney();
+            }
             else if (totalIdx == 2)
             {
                 for (int i = 0; i < vec.size(); i++)
@@ -357,6 +364,7 @@ int main()
                     cin >> tick;
                     vec[i].setTick(tick);
                     cout << "Done." << endl;
+                    fileUpdate(fileName, vec);
                     break;
                 }
             if (!B)
