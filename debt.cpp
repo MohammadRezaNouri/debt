@@ -205,7 +205,7 @@ int main()
         vec.push_back(temp);
     }
     file.close();
-    menuFunc(10, "Add", "Edit", "ShowAll", "showTicked", "showNotTicked", "Exit", "Total", "EditTicked", "Search", "Profit");
+    menuFunc(10, "Add", "Edit", "ShowAll", "showTicked", "showNotTicked", "Exit", "Total", "Delete", "Search", "Profit");
     while (1)
     {
         showMenu();
@@ -360,11 +360,15 @@ int main()
                 {
                     B = 1;
                     vec[i].print();
-                    cout << "Enter new tick(0/1): ";
-                    cin >> tick;
-                    vec[i].setTick(tick);
-                    cout << "Done." << endl;
+                    int deleteOption; // for cancel
+                    cout << "0 -> cancel" << endl
+                         << "1 -> continue" << endl;
+                    cin >> deleteOption;
+                    if (deleteOption == 0)
+                        break;
+                    vec.erase(vec.begin() + i); // delete object
                     fileUpdate(fileName, vec);
+                    cout << "Done." << endl;
                     break;
                 }
             if (!B)
