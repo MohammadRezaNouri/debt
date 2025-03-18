@@ -221,16 +221,25 @@ int main()
         }
         else if (choice == 0)
         {
+            cout << "Enter 0 to cancel." << endl;
             index = vec.size();
             cout << "Enter name: ";
             cin >> name;
+            if (name == "0")
+                continue;
             cout << "Enter money: ";
             cin >> money;
+            if (money == 0)
+                continue;
             cout << "Enter get date: ";
             cin >> getDate;
+            if (getDate == "0")
+                continue;
             tick = false;
             cout << "Enter get detail: ";
             cin >> detail;
+            if (detail == "0")
+                continue;
             temp.get(index, name, getDate, money, tick, detail);
             vec.push_back(temp);
             sort(vec.begin(), vec.end());
