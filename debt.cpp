@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdarg.h>
 #include <algorithm>
+#include <windows.h>
 
 using namespace std;
 
@@ -54,6 +55,7 @@ void price::get(int index, string name, string getDate, float money, bool tick, 
 
 void price::print()
 {
+    SetConsoleOutputCP(CP_UTF8);
     cout << index << " : " << name << " | " << money << " | " << getDate << " | ";
     if (tick)
         cout << "✅";
