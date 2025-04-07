@@ -387,17 +387,44 @@ int main()
         }
         else if (choice == 8)
         {
-            cout << "Enter name for search: ";
-            cin >> name;
-            int B = 0;
-            for (int i = 0; i < vec.size(); i++)
-                if (name == vec[i].getName())
-                {
-                    B = 1;
-                    vec[i].print();
-                }
-            if (!B)
-                cout << "Not found!" << endl;
+            int searchIdx;
+            cout << "\tbyName = 0" << endl
+                 << "\tbyID = 1" << endl;
+            cin >> searchIdx;
+            if (searchIdx == 0)
+            {
+                cout << "Enter name for search: ";
+                cin >> name;
+                int B = 0;
+                for (int i = 0; i < vec.size(); i++)
+                    if (name == vec[i].getName())
+                    {
+                        B = 1;
+                        vec[i].print();
+                    }
+                if (!B)
+                    cout << "Not found!" << endl;
+            }
+            else if (searchIdx == 1)
+            {
+                cout << "Enter ID: ";
+                cin >> index;
+                int B = 0;
+                for (int i = 0; i < vec.size(); i++)
+                    if (index == vec[i].getID())
+                    {
+                        B = 1;
+                        vec[i].print();
+                        break;
+                    }
+                if (!B)
+                    cout << "Not found!" << endl;
+            }
+            else
+            {
+                cout << "Invalid num" << endl;
+                continue;
+            }
         }
         else if (choice == 9)
         {
