@@ -387,7 +387,7 @@ int main()
         }
         else if (choice == 8)
         {
-            int searchIdx;
+            int searchIdx, tickIdx, B = 0;
             cout << "\tbyName = 0" << endl
                  << "\tbyID = 1" << endl;
             cin >> searchIdx;
@@ -395,21 +395,49 @@ int main()
             {
                 cout << "Enter name for search: ";
                 cin >> name;
-                int B = 0;
-                for (int i = 0; i < vec.size(); i++)
-                    if (name == vec[i].getName())
-                    {
-                        B = 1;
-                        vec[i].print();
-                    }
+                cout << "\tall = 0" << endl
+                     << "\tticked = 1" << endl
+                     << "\tnotTicked = 2" << endl;
+                cin >> tickIdx;
+                if (tickIdx == 0)
+                {
+                    for (int i = 0; i < vec.size(); i++)
+                        if (name == vec[i].getName())
+                        {
+                            vec[i].print();
+                            B = 1;
+                        }
+                }
+                else if (tickIdx == 1)
+                {
+                    for (int i = 0; i < vec.size(); i++)
+                        if (name == vec[i].getName() && vec[i].getTick())
+                        {
+                            vec[i].print();
+                            B = 1;
+                        }
+                }
+                else if (tickIdx == 2)
+                {
+                    for (int i = 0; i < vec.size(); i++)
+                        if (name == vec[i].getName() && !vec[i].getTick())
+                        {
+                            vec[i].print();
+                            B = 1;
+                        }
+                }
+                else
+                {
+                    cout << "Invalid num" << endl;
+                    continue;
+                }
                 if (!B)
-                    cout << "Not found!" << endl;
+                    cout << "Not found!" << endl;        
             }
             else if (searchIdx == 1)
             {
                 cout << "Enter ID: ";
                 cin >> index;
-                int B = 0;
                 for (int i = 0; i < vec.size(); i++)
                     if (index == vec[i].getID())
                     {
