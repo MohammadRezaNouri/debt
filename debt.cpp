@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <algorithm>
 #include <windows.h>
+#include <limits>
 
 using namespace std;
 
@@ -213,7 +214,13 @@ int main()
         showMenu();
         cout << endl;
         int choice;
-        cin >> choice;
+        while (!(cin >> choice))
+        {
+            cout << "Invalid input." << endl
+                 << "Enter choice: ";
+            cin.clear();                                         // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+        }
         if (choice == 5)
         {
             fileUpdate(fileName, vec);
@@ -228,7 +235,13 @@ int main()
             if (name == "0")
                 continue;
             cout << "Enter money: ";
-            cin >> money;
+            while (!(cin >> money))
+            {
+                cout << "Invalid input." << endl
+                     << "Enter money: ";
+                cin.clear();                                         // clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            }
             if (money == 0)
                 continue;
             cout << "Enter get date: ";
@@ -248,7 +261,13 @@ int main()
         else if (choice == 1)
         {
             cout << "Enter ID: ";
-            cin >> index;
+            while (!(cin >> index))
+            {
+                cout << "Invalid input." << endl
+                     << "Enter ID: ";
+                cin.clear();                                         // clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            }
             int B = 0;
             for (int i = 0; i < vec.size(); i++)
                 if (index == vec[i].getID())
@@ -276,7 +295,13 @@ int main()
                     else if (editOption == 2)
                     {
                         cout << "Enter new money: ";
-                        cin >> money;
+                        while (!(cin >> money))
+                        {
+                            cout << "Invalid input." << endl
+                                 << "Enter new money: ";
+                            cin.clear();                                         // clear the error flag
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                        }
                         vec[i].setMoney(money);
                     }
                     else if (editOption == 3)
@@ -288,7 +313,13 @@ int main()
                     else if (editOption == 4)
                     {
                         cout << "Enter new tick (0/1): ";
-                        cin >> tick;
+                        while (!(cin >> tick))
+                        {
+                            cout << "Invalid input." << endl
+                                 << "Enter new tick: ";
+                            cin.clear();                                         // clear the error flag
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                        }
                         vec[i].setTick(tick);
                     }
                     else if (editOption == 5)
@@ -364,7 +395,13 @@ int main()
         else if (choice == 7)
         {
             cout << "Enter ID: ";
-            cin >> index;
+            while (!(cin >> index))
+            {
+                cout << "Invalid input." << endl
+                     << "Enter ID: ";
+                cin.clear();                                         // clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            }
             int B = 0;
             for (int i = 0; i < vec.size(); i++)
                 if (index == vec[i].getID())
@@ -374,7 +411,14 @@ int main()
                     int deleteOption; // for cancel
                     cout << "0 -> cancel" << endl
                          << "1 -> continue" << endl;
-                    cin >> deleteOption;
+                    while (!(cin >> deleteOption))
+                    {
+                        cout << "Invalid input." << endl
+                             << "0 -> cancel" << endl
+                             << "1 -> continue" << endl;
+                        cin.clear();                                         // clear the error flag
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                    }
                     if (deleteOption == 0)
                         break;
                     vec.erase(vec.begin() + i); // delete object
@@ -390,7 +434,14 @@ int main()
             int searchIdx, tickIdx, B = 0;
             cout << "\tbyName = 0" << endl
                  << "\tbyID = 1" << endl;
-            cin >> searchIdx;
+            while (!(cin >> searchIdx))
+            {
+                cout << "Invalid input." << endl
+                     << "\tbyName = 0" << endl
+                     << "\tbyID = 1" << endl;
+                cin.clear();                                         // clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            }
             if (searchIdx == 0)
             {
                 cout << "Enter name for search: ";
@@ -398,7 +449,15 @@ int main()
                 cout << "\tall = 0" << endl
                      << "\tticked = 1" << endl
                      << "\tnotTicked = 2" << endl;
-                cin >> tickIdx;
+                while (!(cin >> tickIdx))
+                {
+                    cout << "Invalid input." << endl
+                         << "\tall = 0" << endl
+                         << "\tticked = 1" << endl
+                         << "\tnotTicked = 2" << endl;
+                    cin.clear();                                         // clear the error flag
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                }
                 if (tickIdx == 0)
                 {
                     for (int i = 0; i < vec.size(); i++)
@@ -437,7 +496,13 @@ int main()
             else if (searchIdx == 1)
             {
                 cout << "Enter ID: ";
-                cin >> index;
+                while (!(cin >> index))
+                {
+                    cout << "Invalid input." << endl
+                         << "Enter ID: ";
+                    cin.clear();                                         // clear the error flag
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                }
                 for (int i = 0; i < vec.size(); i++)
                     if (index == vec[i].getID())
                     {
@@ -457,7 +522,13 @@ int main()
         else if (choice == 9)
         {
             cout << "Enter ID: ";
-            cin >> index;
+            while (!(cin >> index))
+            {
+                cout << "Invalid input." << endl
+                     << "Enter ID: ";
+                cin.clear();                                         // clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            }
             int B = 0;
             for (int i = 0; i < vec.size(); i++)
                 if (index == vec[i].getID())
@@ -466,9 +537,15 @@ int main()
                     vec[i].print();
                     float tavarom = 40.2 / (365 * 100); // Tavarom Roozane
                     float payment = vec[i].getMoney();
-                    cout << "Enter days: ";
                     float days;
-                    cin >> days;
+                    cout << "Enter days: ";
+                    while (!(cin >> days))
+                    {
+                        cout << "Invalid input." << endl
+                             << "Enter days: ";
+                        cin.clear();                                         // clear the error flag
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                    }
                     payment += payment * tavarom * days; // result
                     cout << "result: " << payment << endl
                          << endl;
